@@ -3,7 +3,7 @@ import App from "./App";
 import "./index.css";
 
 // Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && 'production' === import.meta.env.MODE) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then((registration) => {

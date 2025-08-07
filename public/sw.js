@@ -1,46 +1,34 @@
-// Service Worker for ScreenShare Connect PWA
 const CACHE_NAME = 'screenshare-connect-v1';
 const urlsToCache = [
   '/',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
   '/manifest.json'
 ];
 
-// Install event - cache resources
-self.addEventListener('install', (event) => {
+self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
+      .then(function(cache) {
         return cache.addAll(urlsToCache);
       })
-      .catch((error) => {
-        console.log('Cache install failed:', error);
-      })
   );
 });
 
-// Fetch event - serve from cache when offline
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
+      .then(function(response) {
         // Return cached version or fetch from network
         return response || fetch(event.request);
-      })
-      .catch(() => {
-        // If both cache and network fail, show offline page
-        return caches.match('/');
-      })
+      }
+    )
   );
 });
 
-// Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', function(event) {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(function(cacheNames) {
       return Promise.all(
-        cacheNames.map((cacheName) => {
+        cacheNames.map(function(cacheName) {
           if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName);
           }
