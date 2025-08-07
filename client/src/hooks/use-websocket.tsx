@@ -4,8 +4,10 @@ export function useWebSocket() {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const maxReconnectAttempts = 5;
+  const pingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const maxReconnectAttempts = 10;
   const reconnectAttempts = useRef(0);
+  const pingInterval = 30000; // 30 seconds
 
   const connect = () => {
     try {
@@ -17,22 +19,54 @@ export function useWebSocket() {
         setIsConnected(true);
         reconnectAttempts.current = 0;
         console.log('WebSocket connected');
+        
+        // Start heartbeat
+        const startHeartbeat = () => {
+          pingTimeoutRef.current = setTimeout(() => {
+            if (ws.readyState === WebSocket.OPEN) {
+              ws.send(JSON.stringify({ type: 'ping' }));
+              startHeartbeat();
+            }
+          }, pingInterval);
+        };
+        startHeartbeat();
       };
 
       ws.onclose = (event) => {
         setIsConnected(false);
         setSocket(null);
+        
+        // Clear heartbeat
+        if (pingTimeoutRef.current) {
+          clearTimeout(pingTimeoutRef.current);
+        }
+        
         console.log('WebSocket disconnected:', event.code, event.reason);
 
         // Attempt to reconnect unless it was a manual close
         if (event.code !== 1000 && reconnectAttempts.current < maxReconnectAttempts) {
           reconnectAttempts.current++;
-          const delay = Math.min(1000 * Math.pow(2, reconnectAttempts.current), 30000);
+          const delay = Math.min(1000 * Math.pow(2, reconnectAttempts.current), 10000);
           
           reconnectTimeoutRef.current = setTimeout(() => {
             console.log(`Attempting to reconnect (${reconnectAttempts.current}/${maxReconnectAttempts})`);
             connect();
           }, delay);
+        } else if (reconnectAttempts.current >= maxReconnectAttempts) {
+          console.error('Max reconnection attempts reached. Please refresh the page.');
+        }
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'pong') {
+            // Connection is alive, continue
+            return;
+          }
+          // Handle other messages normally
+        } catch (error) {
+          // Handle non-JSON messages
         }
       };
 
@@ -54,6 +88,10 @@ export function useWebSocket() {
         clearTimeout(reconnectTimeoutRef.current);
       }
       
+      if (pingTimeoutRef.current) {
+        clearTimeout(pingTimeoutRef.current);
+      }
+      
       if (socket) {
         socket.close(1000, 'Component unmounting');
       }
@@ -63,6 +101,10 @@ export function useWebSocket() {
   const disconnect = () => {
     if (reconnectTimeoutRef.current) {
       clearTimeout(reconnectTimeoutRef.current);
+    }
+    
+    if (pingTimeoutRef.current) {
+      clearTimeout(pingTimeoutRef.current);
     }
     
     if (socket && socket.readyState === WebSocket.OPEN) {

@@ -4,6 +4,7 @@ import ConnectionSetup from "@/components/connection-setup";
 import HostInterface from "@/components/host-interface";
 import ViewerInterface from "@/components/viewer-interface";
 import PWAInstallPrompt from "@/components/pwa-install-prompt";
+import ConnectionStatus from "@/components/connection-status";
 
 type ViewMode = 'setup' | 'host' | 'viewer';
 type ConnectionStatus = 'disconnected' | 'connecting' | 'connected';
@@ -62,6 +63,7 @@ export default function Home() {
           />
         )}
       </main>
+      <ConnectionStatus />
       <PWAInstallPrompt />
     </div>
   );

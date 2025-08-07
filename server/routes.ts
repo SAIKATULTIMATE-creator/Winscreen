@@ -141,6 +141,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const data = JSON.parse(message.toString());
         
         switch (data.type) {
+          case 'ping':
+            // Respond to ping with pong
+            ws.send(JSON.stringify({ type: 'pong' }));
+            break;
+            
           case 'join_room':
             ws.deviceId = data.deviceId;
             ws.roomCode = data.roomCode;
