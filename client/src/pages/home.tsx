@@ -13,7 +13,7 @@ export default function Home() {
   const [currentRoomCode, setCurrentRoomCode] = useState<string>('');
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-background">
+    <div className="min-h-screen">
       <AppHeader 
         connectionStatus={connectionStatus} 
         data-testid="app-header"

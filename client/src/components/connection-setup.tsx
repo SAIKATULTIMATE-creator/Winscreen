@@ -45,7 +45,7 @@ export default function ConnectionSetup({ onStartHosting, onJoinSession }: Conne
 
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         {/* Host Option */}
-        <Card className="p-6 hover:shadow-xl transition-shadow">
+        <Card className="p-6 hover:shadow-xl transition-shadow backdrop-card">
           <div className="text-center">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Radio className="text-primary text-2xl" size={32} />
@@ -67,7 +67,7 @@ export default function ConnectionSetup({ onStartHosting, onJoinSession }: Conne
         </Card>
 
         {/* Join Option */}
-        <Card className="p-6 hover:shadow-xl transition-shadow">
+        <Card className="p-6 hover:shadow-xl transition-shadow backdrop-card">
           <div className="text-center">
             <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Eye className="text-accent text-2xl" size={32} />
@@ -91,7 +91,7 @@ export default function ConnectionSetup({ onStartHosting, onJoinSession }: Conne
 
       {/* Join Form */}
       {showJoinForm && (
-        <Card className="p-6">
+        <Card className="p-6 backdrop-card">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground mb-4">
             Enter Room Code
           </h3>
