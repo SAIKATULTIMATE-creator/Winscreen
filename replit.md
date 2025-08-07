@@ -1,6 +1,6 @@
 # Overview
 
-This is a real-time screen sharing application built with React and Express. The app enables users to either host screen sharing sessions or join existing sessions using room codes. It uses WebRTC for peer-to-peer communication and WebSockets for signaling, providing a seamless cross-device screen sharing experience.
+Winscreen is a real-time screen sharing application built with React and Express. The app enables users to either host screen sharing sessions or join existing sessions using room codes. It uses WebRTC for peer-to-peer communication and WebSockets for signaling, providing a seamless cross-device screen sharing experience.
 
 The application is now configured as a Progressive Web App (PWA) with offline capabilities, installable on mobile devices, and ready for deployment on Replit's cloud platform.
 

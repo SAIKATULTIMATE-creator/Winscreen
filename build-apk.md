@@ -1,4 +1,4 @@
-# How to Install Your ScreenShare Connect APK
+# How to Install Your Winscreen APK
 
 ## Option 1: Direct APK Download (Fastest)
 

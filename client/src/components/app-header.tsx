@@ -23,7 +23,7 @@ export default function AppHeader({ connectionStatus }: AppHeaderProps) {
               <Monitor className="text-white text-sm" size={16} />
             </div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-foreground">
-              ScreenShare Connect
+              Winscreen
             </h1>
           </div>
           <div className="flex items-center space-x-4">

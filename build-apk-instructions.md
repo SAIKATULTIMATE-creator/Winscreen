@@ -1,4 +1,4 @@
-# 📱 APK Build Instructions for ScreenShare Connect
+# 📱 APK Build Instructions for Winscreen
 
 ## 🚀 Quick Setup (2 Steps)
 

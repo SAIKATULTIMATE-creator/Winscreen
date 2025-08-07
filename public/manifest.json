@@ -1,6 +1,6 @@
 {
-  "name": "ScreenShare Connect",
-  "short_name": "ScreenShare",
+  "name": "Winscreen",
+  "short_name": "Winscreen",
   "description": "Share your screen with friends across multiple devices using WebRTC",
   "start_url": "/",
   "display": "standalone",

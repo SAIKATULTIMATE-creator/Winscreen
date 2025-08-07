@@ -1,6 +1,6 @@
 {
   "appId": "com.screenshare.connect",
-  "appName": "ScreenShare Connect",
+  "appName": "Winscreen",
   "webDir": "dist/public",
   "server": {
     "androidScheme": "https",

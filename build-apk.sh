@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Building ScreenShare Connect APK..."
+echo "🚀 Building Winscreen APK..."
 echo ""
 
 # Step 1: Build the web app
