@@ -3,7 +3,8 @@
   "appName": "ScreenShare Connect",
   "webDir": "dist/public",
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "url": "https://your-app-name.onrender.com"
   },
   "plugins": {
     "SplashScreen": {
@@ -11,6 +12,14 @@
       "backgroundColor": "#2563eb",
       "showSpinner": true,
       "spinnerColor": "#ffffff"
+    },
+    "App": {
+      "launchUrl": "https://your-app-name.onrender.com"
     }
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
   }
 }

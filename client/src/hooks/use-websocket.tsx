@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { APP_CONFIG } from '@/config/app-config';
 
 export function useWebSocket() {
   const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -11,8 +12,8 @@ export function useWebSocket() {
 
   const connect = () => {
     try {
-      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-      const wsUrl = `${protocol}//${window.location.host}/ws`;
+      const wsUrl = APP_CONFIG.getWebSocketUrl();
+      console.log('Connecting to WebSocket:', wsUrl);
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
